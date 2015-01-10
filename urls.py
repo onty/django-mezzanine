@@ -5,7 +5,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
-
+from settings import *
 
 admin.autodiscover()
 
@@ -17,6 +17,10 @@ urlpatterns = i18n_patterns("",
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
+)
+
+urlpatterns += patterns('',
+    (r'^static/(?P<path>.*)$','django.views.static.serve',{'document_root': STATIC_ROOT} ),
 )
 
 urlpatterns += patterns('',
